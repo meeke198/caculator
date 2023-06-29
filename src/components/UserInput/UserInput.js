@@ -4,10 +4,11 @@ const initialUserInput = {
         'yearly-contribution': 1200,
         'expected-return': 7,
         'duration': 10}
-const UserInput = () => {
+const UserInput = (props) => {
     const [userInput, setUserInput] = useState(initialUserInput)
     const onSubmitHandler = (e) => {
         e.preventDefault();
+        props.onCaculate(userInput);
     }
     const resetHandler = () => {
         setUserInput(initialUserInput)
@@ -16,7 +17,7 @@ const UserInput = () => {
         setUserInput((prev) => {
             return {
               ...prev,
-              [input]: value,
+              [input]: +value,
             };
             
         })
@@ -59,7 +60,7 @@ return (
           type="number"
           id="duration"
           onChange={(e) => changeHandler("duration", e.target.value)}
-          value={userInput['duration']}
+          value={userInput["duration"]}
         />
       </p>
     </div>
